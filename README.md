@@ -3,12 +3,20 @@ Experimental contracts for IEEE P7012 based on ODRL and DPV
 
 ## Summary of modelled contracts
 
-| Contract # | Rule        | Conflict Strategy | Purpose                            | ODRL Policy                                  |
-|------------|-------------|-------------------|------------------------------------|----------------------------------------------|
-| 0          | Prohibition | `perm`            |                                    | [contract-0](./odrl-contracts/contract-0.md) |
-| 1-GDPR     | Permission  | `perm`            | equal to `dpv:ServiceDelivery`     | [contract-1](./odrl-contracts/contract-1.md) |
-| 1-non-GDPR | Permission  | `perm`            | equal to `dpv:ServiceDelivery`     | [contract-1](./odrl-contracts/contract-1.md) |
-| 1-non-GDPR | Prohibition | `perm`            | not equal to `dpv:ServiceDelivery` | [contract-1](./odrl-contracts/contract-1.md) |
+| Contract # | Rule        | Conflict Strategy | Action              | Purpose                                                               | ODRL Policy                                  |
+|------------|-------------|-------------------|---------------------|-----------------------------------------------------------------------|----------------------------------------------|
+| 0          | Prohibition | `perm`            | `odrl:use`          |                                                                       | [contract-0](./odrl-contracts/contract-0.md) |
+| 1-GDPR     | Permission  | `perm`            | `odrl:use`          | equal to `dpv:ServiceDelivery`                                        | [contract-1](./odrl-contracts/contract-1.md) |
+| 1-non-GDPR | Permission  | `perm`            | `odrl:use`          | equal to `dpv:ServiceDelivery`                                        | [contract-1](./odrl-contracts/contract-1.md) |
+| 1-non-GDPR | Prohibition | `perm`            | `odrl:use`          | not equal to `dpv:ServiceDelivery`                                    | [contract-1](./odrl-contracts/contract-1.md) |
+| 2-GDPR     | Permission  | `perm`            | `odrl:use`          | equal to `dpv:ServiceDelivery`                                        | [contract-2](./odrl-contracts/contract-2.md) |
+| 2-GDPR     | Duty        | `perm`            | `dpv-odrl:Disclose` |                                                                       | [contract-2](./odrl-contracts/contract-2.md) |
+| 2-non-GDPR | Permission  | `perm`            | `odrl:use`          | equal to `dpv:ServiceDelivery`                                        | [contract-2](./odrl-contracts/contract-2.md) |
+| 2-non-GDPR | Prohibition | `perm`            | `odrl:use`          | not equal to `dpv:ServiceDelivery`                                    | [contract-2](./odrl-contracts/contract-2.md) |
+| 2-non-GDPR | Duty        | `perm`            | `dpv-odrl:Disclose` |                                                                       | [contract-2](./odrl-contracts/contract-2.md) |
+| 3-GDPR     | Permission  | `perm`            | `odrl:use`          | is any of `dpv:ServiceDelivery` or `dpv:ServiceImprovementAnalytics`  | [contract-3](./odrl-contracts/contract-3.md) |
+| 3-non-GDPR | Permission  | `perm`            | `odrl:use`          | is any of `dpv:ServiceDelivery` or `dpv:ServiceImprovementAnalytics`  | [contract-3](./odrl-contracts/contract-3.md) |
+| 3-non-GDPR | Prohibition | `perm`            | `odrl:use`          | is none of `dpv:ServiceDelivery` or `dpv:ServiceImprovementAnalytics` | [contract-3](./odrl-contracts/contract-3.md) |
 
 ## Additional context
 
@@ -20,4 +28,5 @@ Experimental contracts for IEEE P7012 based on ODRL and DPV
 ## Action points
 
 - `dpv:ServiceDelivery` is not yet in DPV
+- `dpv:ServiceImprovementAnalytics` is not yet in DPV
 - `https://w3id.org/dpv/mappings/odrl` mapping is not yet online but the necessary bits will be soon 
