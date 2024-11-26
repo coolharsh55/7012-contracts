@@ -1,0 +1,31 @@
+@prefix dpv: <https://w3id.org/dpv#> .
+@prefix dpv-p7012: <https://w3id.org/dpv/standards/p7012#> .
+@prefix pd: <https://w3id.org/dpv/pd#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+dpv-p7012:SP-BY-A-DP a dpv-p7012:PrivacyTerm, skos:Concept, rdfs:Class ;
+    skos:prefLabel "SP BY-A-DP";
+    skos:definition "Privacy Term that allows Service Provision, including Analytics for Service Improvement, requires data portability, and prohibits tracking or profiling"@en ;
+    dpv:hasDataContoller dpv:ServiceProvider ;
+    dpv:hasDataSubject dpv:ServiceConsumer ;
+    dpv:hasRule [
+        a dpv:Permission ;
+        dpv:hasPurpose dpv:ServiceProvision ;
+        dpv:hasPurpose dpv:ServiceOptimisation, dpv:ServiceUsageAnalytics ;
+        dpv:isImplementedByEntity dpv:ServiceProvider ;
+    ] ;
+    dpv:hasRule [
+        a dpv:Obligation ;
+        dpv:hasPersonalData pd:ServiceData ;
+        dpv:hasProcessing dpv:Share ;
+        dpv:hasRecipient dpv:ServiceConsumer ;
+        dpv:isImplementedByEntity dpv:ServiceProvider ;
+    ] ;
+    dpv:hasRule [
+        a dpv:Prohibition ;
+        dpv:hasProcessing dpv:Tracking, dpv:Profiling ;
+        dpv:isImplementedByEntity dpv:ServiceProvider ;
+    ] ;
+    dpv:hasRuleInterpretation dpv:ProhibitByDefault, dpv:ProhibitOnConflict .
