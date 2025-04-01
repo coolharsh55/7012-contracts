@@ -1,0 +1,65 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dpv-odrl: <https://w3id.org/dpv/mappings/odrl#>
+PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
+PREFIX p7012: <https://w3id.org/dpv/standards/p7012#>
+
+PREFIX ex: <http://example.org/>
+
+ex:PDC-INTENT a odrl:Set ;
+    odrl:uid ex:PDC-INTENT ;
+    odrl:profile <https://w3id.org/dpv/mappings/odrl> ;
+    dcterms:title "PDC-INTENT"@en ;
+    dcterms:description "Term that indicates access to data is being provided for the purposes of Intent Casting"@en ;
+    odrl:conflict odrl:perm ;
+    # service delivery is mandatory
+    odrl:obligation [
+        odrl:action dpv-odrl:Processing ;
+        odrl:target dpv-odrl:PersonalData ;
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:Entity ;
+        odrl:constraint [
+            odrl:leftOperand dpv-odrl:Purpose ;
+            odrl:operator odrl:eq ;
+            odrl:rightOperand p7012:ServiceDelivery # substitute p7012:ServiceDelivery by p7012:IntentCasting ?
+        ]
+    ] ;
+    # data portability is permitted
+    odrl:permission [
+        odrl:action dpv-odrl:Share ;
+        odrl:target p7012:ServiceData ; # should it be only p7012:ServiceData or all of (p7012:ServiceData,p7012:NonServiceData,p7012:ServiceAnalyticsData,p7012:ServiceUsageData)
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:Entity ;
+    ] ;
+    # analytics by second party and third party is prohibited
+    odrl:prohibition [
+        odrl:action dpv-odrl:Processing ;
+        odrl:target dpv-odrl:PersonalData ;
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:Entity, p7012:ThirdParty ;
+        odrl:constraint [
+            odrl:leftOperand dpv-odrl:Purpose ;
+            odrl:operator odrl:eq ;
+            odrl:rightOperand p7012:ServiceAnalytics
+        ]
+    ] ;
+    # tracking by second party and third party is prohibited
+    odrl:prohibition [
+        odrl:action dpv-odrl:Tracking ;
+        odrl:target dpv-odrl:PersonalData ;
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:Entity, p7012:ThirdParty ;
+    ] ;
+    # profiling by the second and third party is prohibited
+    odrl:prohibition [
+        odrl:action dpv-odrl:Profiling ;
+        odrl:target dpv-odrl:PersonalData ;
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:Entity, p7012:ThirdParty ;
+    ] ;
+    # sharing with third party is prohibited
+    odrl:prohibition [
+        odrl:action dpv-odrl:Share ;
+        odrl:target dpv-odrl:PersonalData ;
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:ThirdParty ;
+    ] .
