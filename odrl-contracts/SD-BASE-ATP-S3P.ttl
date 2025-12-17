@@ -5,11 +5,11 @@ PREFIX p7012: <https://w3id.org/dpv/standards/p7012#>
 
 PREFIX ex: <http://example.org/>
 
-ex:SD-BY-A-DP a odrl:Set ;
-    odrl:uid ex:SD-BY-A-DP ;
+ex:SD-BASE-ATP-S3P a odrl:Set ;
+    odrl:uid ex:SD-BASE-ATP-S3P ;
     odrl:profile <https://w3id.org/dpv/mappings/odrl> ;
-    dcterms:title "SD-BY-A-DP"@en ;
-    dcterms:description "Term that requires Service Delivery and permits Analytics, with an obligation for Data Portability, and prohibits Analytics by 3rd Party, prohibits Tracking or Profiling by 2nd and 3rd Party, and prohibits sharing any data with 3rd Party"@en ;
+    dcterms:title "SD-BASE-ATP-S3P"@en ;
+    dcterms:description "Term that requires Service Delivery, and permits Analytics, Tracking, or Profiling by the 2nd Party, and permits sharing data that has been fully anonymised with 3rd Party, and prohibits Analytics, Tracking, or Profiling by 3rd Party, and prohibits sharing on non-anonymised data with 3rd Party"@en ;
     odrl:conflict odrl:perm ;
     # service delivery is mandatory
     odrl:obligation [
@@ -23,8 +23,8 @@ ex:SD-BY-A-DP a odrl:Set ;
             odrl:rightOperand p7012:ServiceDelivery
         ]
     ] ;
-    # data portability is mandatory
-    odrl:obligation [
+    # data portability is permitted
+    odrl:permission [
         odrl:action dpv-odrl:Share ;
         odrl:target p7012:ServiceData ; # should it be only p7012:ServiceData or all of (p7012:ServiceData,p7012:NonServiceData,p7012:ServiceAnalyticsData,p7012:ServiceUsageData)
         odrl:assigner p7012:Person ;
@@ -54,21 +54,42 @@ ex:SD-BY-A-DP a odrl:Set ;
             odrl:rightOperand p7012:ServiceAnalytics
         ]
     ] ;
-    # tracking by second party and third party is prohibited
+    # tracking by second party is permitted
+    odrl:permission [
+        odrl:action dpv-odrl:Tracking ;
+        odrl:target dpv-odrl:PersonalData ;
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:Entity ;
+    ] ;
+    # tracking by third party is prohibited
     odrl:prohibition [
         odrl:action dpv-odrl:Tracking ;
         odrl:target dpv-odrl:PersonalData ;
         odrl:assigner p7012:Person ;
-        odrl:assignee p7012:Entity, p7012:ThirdParty ;
+        odrl:assignee p7012:ThirdParty ;
     ] ;
-    # profiling by the second and third party is prohibited
+    # profiling by second party is permitted
+    odrl:permission [
+        odrl:action dpv-odrl:Profiling ;
+        odrl:target dpv-odrl:PersonalData ;
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:Entity ;
+    ] ;
+    # profiling by third party is prohibited
     odrl:prohibition [
         odrl:action dpv-odrl:Profiling ;
         odrl:target dpv-odrl:PersonalData ;
         odrl:assigner p7012:Person ;
-        odrl:assignee p7012:Entity, p7012:ThirdParty ;
+        odrl:assignee p7012:ThirdParty ;
     ] ;
-    # sharing with third party is prohibited
+    # sharing data that has been fully anonymised with third party is permitted
+    odrl:permission [
+        odrl:action dpv-odrl:Share ;
+        odrl:target dpv-odrl:AnonymisedData ;
+        odrl:assigner p7012:Person ;
+        odrl:assignee p7012:ThirdParty ;
+    ] ;
+    # sharing data that has not been anonymised with third party is prohibited
     odrl:prohibition [
         odrl:action dpv-odrl:Share ;
         odrl:target dpv-odrl:PersonalData ;

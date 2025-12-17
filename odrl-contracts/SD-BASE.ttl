@@ -5,10 +5,10 @@ PREFIX p7012: <https://w3id.org/dpv/standards/p7012#>
 
 PREFIX ex: <http://example.org/>
 
-ex:SD-BY a odrl:Set ;
-    odrl:uid ex:SD-BY ;
+ex:SD-BASE a odrl:Set ;
+    odrl:uid ex:SD-BASE ;
     odrl:profile <https://w3id.org/dpv/mappings/odrl> ;
-    dcterms:title "SD-BY"@en ;
+    dcterms:title "SD-BASE"@en ;
     dcterms:description "Term that requires Service Delivery, and prohibits Analytics, Tracking, or Profiling by 2nd and 3rd Party, and prohibits sharing any data with 3rd Party"@en ;
     odrl:conflict odrl:perm ;
     # service delivery is mandatory

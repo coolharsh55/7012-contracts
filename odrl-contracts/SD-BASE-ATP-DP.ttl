@@ -5,11 +5,11 @@ PREFIX p7012: <https://w3id.org/dpv/standards/p7012#>
 
 PREFIX ex: <http://example.org/>
 
-ex:SD-BY-ATP-S3P-DP a odrl:Set ;
-    odrl:uid ex:SD-BY-ATP-S3P-DP ;
+ex:SD-BASE-ATP-DP a odrl:Set ;
+    odrl:uid ex:SD-BASE-ATP-DP ;
     odrl:profile <https://w3id.org/dpv/mappings/odrl> ;
-    dcterms:title "SD-BY-ATP-S3P-DP"@en ;
-    dcterms:description "Term that requires Service Delivery, and permits Analytics, Tracking, or Profiling by the 2nd Party, and permits sharing data that has been fully anonymised with 3rd Party, with an obligation for Data Portability, and prohibits Analytics, Tracking, Profiling by 3rd Party, and prohibits sharing on non-anonymised data with 3rd Party"@en ;
+    dcterms:title "SD-BASE-ATP-DP"@en ;
+    dcterms:description "Term that requires Service Delivery, and permits Analytics, Tracking, or Profiling by the 2nd Party, with an obligation for Data Portability, and prohibits Analytics, Tracking, or Profiling by 3rd Party, and prohibits sharing any data with 3rd Party"@en ;
     odrl:conflict odrl:perm ;
     # service delivery is mandatory
     odrl:obligation [
@@ -23,8 +23,8 @@ ex:SD-BY-ATP-S3P-DP a odrl:Set ;
             odrl:rightOperand p7012:ServiceDelivery
         ]
     ] ;
-    # data portability is mandatory
-    odrl:obligation [
+    # data obligation is mandatory
+    odrl:permission [
         odrl:action dpv-odrl:Share ;
         odrl:target p7012:ServiceData ; # should it be only p7012:ServiceData or all of (p7012:ServiceData,p7012:NonServiceData,p7012:ServiceAnalyticsData,p7012:ServiceUsageData)
         odrl:assigner p7012:Person ;
@@ -82,14 +82,7 @@ ex:SD-BY-ATP-S3P-DP a odrl:Set ;
         odrl:assigner p7012:Person ;
         odrl:assignee p7012:ThirdParty ;
     ] ;
-    # sharing data that has been fully anonymised with third party is permitted
-    odrl:permission [
-        odrl:action dpv-odrl:Share ;
-        odrl:target dpv-odrl:AnonymisedData ;
-        odrl:assigner p7012:Person ;
-        odrl:assignee p7012:ThirdParty ;
-    ] ;
-    # sharing data that has not been anonymised with third party is prohibited
+    # sharing with third party is prohibited
     odrl:prohibition [
         odrl:action dpv-odrl:Share ;
         odrl:target dpv-odrl:PersonalData ;
