@@ -17,6 +17,6 @@ Experimental contracts for IEEE P7012 based on ODRL and DPV
 
 
 # Contacts:
-- Beatriz Esteves [:email:](mailto:beatriz.gesteves@upm.es) [:octocat:](https://github.com/besteves4)
+- Beatriz Esteves [:email:](mailto:beatriz.esteves@ugent.be) [:octocat:](https://github.com/besteves4)
 - Harshvardhan J. Pandit [:email:](mailto:me@harshp.com) [:octocat:](https://github.com/coolharsh55)
 
